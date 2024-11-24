@@ -6,10 +6,30 @@
     <title>Phone</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <h1 class="text-3xl font-bold underline">Hello world!</h1>
-    <h3 class="text-red-200">API</h3>
-    <button onclick="loadPhone()">abd</button>
+  <body style="background-color: #1d232a">
+    <main>
+      <!-- search bar -->
+      <section class="flex justify-center p-4 m-4">
+        <input
+          id="search-filde"
+          type="text"
+          placeholder="search..."
+          class="input input-bordered input-warning w-full max-w-xs rounded-xl p-2 bg-gray-300"
+        /><button
+          onclick="handelSeardh()"
+          class="btn btn-success bg-green-700 ml-3 p-2 rounded-xl text-white"
+        >
+          Success
+        </button>
+      </section>
+      <section class="flex justify-center p-4">
+        <div
+          id="phone-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        ></div>
+      </section>
+    </main>
+
     <script src="index.js"></script>
   </body>
 </html>
