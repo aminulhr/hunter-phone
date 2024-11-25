@@ -1,11 +1,15 @@
 const loadPhone = async (searchPhone) => {
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  // await delay(3000); // Delay for 3 seconds
+
   const res = await fetch(
-    ` https://openapi.programming-hero.com/api/phones?search=${searchPhone}`
+    `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`
   );
   const data = await res.json();
   const phones = data.data;
   displyPhone(phones);
 };
+
 const displyPhone = (phones) => {
   const phoneContainer = document.getElementById("phone-container");
   //clear container after load new data
@@ -18,7 +22,7 @@ const displyPhone = (phones) => {
   phones = phones.slice(0, 12);
   phones.forEach((phone) => {
     const phoneCard = document.createElement("div");
-    phoneCard.classList = `card bg-gray-300 w-96 shadow-xl p-4 rounded-xl`;
+    phoneCard.classList = `card bg-gray-400 w-96 shadow-xl p-4 rounded-xl text-black`;
     phoneCard.innerHTML = `
         <figure Class="flex justify-center">
             <img Class='rounded-md 'src="${phone.image}"alt="Shoes"/>
@@ -32,13 +36,25 @@ const displyPhone = (phones) => {
         </div>`;
     phoneContainer.appendChild(phoneCard);
   });
+  togolSpinner(false);
 };
 
 loadPhone();
+
 // handel search
 const handelSeardh = () => {
+  togolSpinner(true);
   const getSearch = document.getElementById("search-filde");
   const getSearchValue = getSearch.value;
   console.log(getSearchValue);
   loadPhone(getSearchValue);
+};
+
+const togolSpinner = (isloading) => {
+  const loadspinner = document.getElementById("loading-spinners");
+  if (isloading) {
+    loadspinner.classList.remove("hidden");
+  } else {
+    loadspinner.classList.add("hidden");
+  }
 };

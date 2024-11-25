@@ -4,9 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phone</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body style="background-color: #1d232a">
+  <body>
     <main>
       <!-- search bar -->
       <section class="flex justify-center p-4 m-4">
@@ -14,21 +19,26 @@
           id="search-filde"
           type="text"
           placeholder="search..."
-          class="input input-bordered input-warning w-full max-w-xs rounded-xl p-2 bg-gray-300"
-        /><button
-          onclick="handelSeardh()"
-          class="btn btn-success bg-green-700 ml-3 p-2 rounded-xl text-white"
-        >
-          Success
+          class="input input-bordered input-warning w-full max-w-xs p-2"
+        />
+        <button onclick="handelSeardh()" class="btn btn-success ml-1">
+          Search
         </button>
       </section>
+
+      <!-- spinner -->
+      <div id="loading-spinners" class="text-center items-center my-4 hidden">
+        <span class="loading loading-spinner text-primary w-10 h-10"></span>
+      </div>
+
+      <!-- search result -->
       <section class="flex justify-center p-4">
         <div
           id="phone-container"
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
         ></div>
       </section>
-      <div class="flex justify-center hidden" id="showMore-btn">
+      <div class="text-center mb-2 hidden" id="showMore-btn">
         <button class="btn btn-success bg-green-500 p-2 rounded-xl">
           Show More
         </button>
