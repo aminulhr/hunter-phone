@@ -1,12 +1,12 @@
 const loadPhone = async (searchPhone) => {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  // await delay(3000); // Delay for 3 seconds
-
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`
   );
+
   const data = await res.json();
   const phones = data.data;
+
   displyPhone(phones);
 };
 
@@ -31,9 +31,10 @@ const displyPhone = (phones) => {
             <h2 class="card-title flex justify-center">${phone.phone_name}</h2>
             <p Class="flex justify-center">If a dog chews shoes whose shoes does he choose?</p>
             <div class="card-actions flex justify-center">
-                <button class="btn btn-primary ">Buy Now</button>
+                <button onclick="showDetails('${phone.slug}')" class="btn btn-primary ">Show Details</button>
             </div>
         </div>`;
+
     phoneContainer.appendChild(phoneCard);
   });
   togolSpinner(false);
@@ -46,7 +47,6 @@ const handelSeardh = () => {
   togolSpinner(true);
   const getSearch = document.getElementById("search-filde");
   const getSearchValue = getSearch.value;
-  console.log(getSearchValue);
   loadPhone(getSearchValue);
 };
 
@@ -57,4 +57,14 @@ const togolSpinner = (isloading) => {
   } else {
     loadspinner.classList.add("hidden");
   }
+};
+
+// handel show details
+const showDetails = async (id) => {
+  console.log("click show details", id);
+  const getData = await fetch(
+    `https://openapi.programming-hero.com/api/phone/${id}`
+  );
+  const data = await getData.json();
+  console.log(data);
 };
