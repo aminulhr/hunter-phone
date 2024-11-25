@@ -1,4 +1,4 @@
-const loadPhone = async (searchPhone) => {
+const loadPhone = async (searchPhone = "oppo") => {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const res = await fetch(
     `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`
@@ -61,10 +61,24 @@ const togolSpinner = (isloading) => {
 
 // handel show details
 const showDetails = async (id) => {
-  console.log("click show details", id);
+  // console.log("click show details", id);
   const getData = await fetch(
     `https://openapi.programming-hero.com/api/phone/${id}`
   );
   const data = await getData.json();
-  console.log(data);
+  const phone = data.data;
+  console.log(phone);
+  phoneDetails(phone);
+};
+
+const phoneDetails = (phone) => {
+  const modalContainer = document.getElementById("modal-container");
+  modalContainer.innerHTML = `
+    
+  <img Class="text-center w-20 h-28" src="${phone.image}"/>
+  <h1 Class="text-xl">Name: ${phone.name}</h1>
+  <p>Display: ${phone.mainFeatures.displaySize} </p>
+
+  `;
+  show_my_modal.showModal();
 };
